@@ -17,12 +17,17 @@ function App() {
 
   useEffect(() => {
     if (Object.keys(gastoEditar).length > 0) {
-      handleNuevoGasto();
+      setModal(true);
+
+      setTimeout(() => {
+        setanimarModal(true);
+      }, 400);
     }
   }, [gastoEditar]);
 
   const handleNuevoGasto = () => {
     setModal(true);
+    setGastoEditar({});
 
     setTimeout(() => {
       setanimarModal(true);
@@ -67,6 +72,7 @@ function App() {
           animarModal={animarModal}
           setanimarModal={setanimarModal}
           guardarGasto={guardarGasto}
+          gastoEditar={gastoEditar}
         />
       )}
     </div>
