@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
+import Filtros from "./components/Filtros";
 import Modal from "./components/Modal";
 import { generarId } from "./helpers";
 import ListadoGastos from "./components/ListadoGastos";
@@ -20,6 +21,8 @@ function App() {
   );
 
   const [gastoEditar, setGastoEditar] = useState({});
+
+  const [filtro, setFiltro] = useState("");
 
   useEffect(() => {
     if (Object.keys(gastoEditar).length > 0) {
@@ -45,6 +48,13 @@ function App() {
       setIsValidPresupuesto(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (filtro) {
+      //filtrar gastos por categoría
+      console.log("filtrando", filtro);
+    }
+  }, [filtro]);
 
   const handleNuevoGasto = () => {
     setModal(true);
@@ -94,6 +104,7 @@ function App() {
       {isValidPresupuesto && (
         <>
           <main>
+            <Filtros filtro={filtro} setFiltro={setFiltro} />
             <ListadoGastos
               gastos={gastos}
               setGastoEditar={setGastoEditar}
